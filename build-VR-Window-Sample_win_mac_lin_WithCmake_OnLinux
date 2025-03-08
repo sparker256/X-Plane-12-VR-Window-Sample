@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# How to run
+# cd $FlyWithLua_REPO
+# ./build-VR-Window-Sample_win_mac_lin_WithCmake_OnLinux
+
+rm -r VR_Window_Sample/win_x64/*.xpl
+rm -r VR_Window_Sample/lin_x64/*.xpl
+rm -r VR_Window_Sample/mac_x64/*.xpl
+
+
+# Windows build
+
+rm -r build/*
+cmake -S ./src -B ./build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=../src/Toolchain-mingw-w64-x86-64.cmake
+cmake --build ./build -v
+cp ./build/win.xpl ./VR_Window_Sample/win_x64/VR_Window_Sample.xpl
+
+
+# Linux build
+
+rm -r build/*
+cmake -S ./src -B ./build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+cmake --build ./build -v
+cp ./build/lin.xpl ./VR_Window_Sample/lin_x64/VR_Window_Sample.xpl
+
+
+# Mac build
+
+rm -r build/*
+# Original toolchain
+cmake -S ./src -B ./build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=../src/Toolchain-ubuntu-osxcross-x86_64-13.cmake
+cmake --build ./build -v
+cp ./build/mac.xpl ./VR_Window_Sample/mac_x64/VR_Window_Sample.xpl
+
+exec $SHELL
+#
