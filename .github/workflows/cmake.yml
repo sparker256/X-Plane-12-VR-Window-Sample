@@ -47,7 +47,7 @@ jobs:
       working-directory: ${{github.workspace}}/build
       run: ctest -C ${{env.BUILD_TYPE}}
       
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: binaries
         path: ${{github.workspace}}/build/*.xpl
@@ -60,7 +60,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: binaries
           path: VR_Window_Sample/lin_x64
@@ -76,7 +76,7 @@ jobs:
         run: mv VR_Window_Sample/lin_x64/mac.xpl VR_Window_Sample/mac_x64/VR_Window_Sample.xpl
       - name: List Final Folder     
         run: ls -R -l  
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: VR_Window_Sample_v${{env.HWS4_VERSION}}
           path: |
